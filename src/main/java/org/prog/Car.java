@@ -1,12 +1,13 @@
 package org.prog;
+import java.util.Objects;
 
 public class Car implements ITransport {
 
     private String color;
-    public int milage = 0;
+    private int mileage = 0;
 
     public void goTo() {
-        milage += 10;
+        mileage += 10;
         goTo("somewhere");
     }
 
@@ -27,6 +28,10 @@ public class Car implements ITransport {
         System.out.println(color + " car turns " + direction);
     }
 
+    public void stopAt(String stop) {
+        System.out.println(color + " car stops at " + stop);
+    }
+
     public void setColor(String newColor) {
         if (newColor != null) {
             color = newColor;
@@ -36,4 +41,21 @@ public class Car implements ITransport {
     public String getColor() {
         return color;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Car) {
+            Car car = (Car) o;
+            return this.color.equals(car.color) && mileage == car.mileage;
+        }
+    return false;
+    }
+
+    @Override
+    public int hashCode() {
+    return (color + mileage).hashCode();
+}
+
+
 }
